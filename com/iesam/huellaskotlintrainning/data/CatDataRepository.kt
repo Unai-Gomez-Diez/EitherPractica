@@ -1,6 +1,7 @@
 package com.iesam.huellaskotlintrainning.data
 
 import com.iesam.huellaskotlintrainning.app.Either
+import com.iesam.huellaskotlintrainning.app.right
 import com.iesam.huellaskotlintrainning.data.local.CatFileLocalDataSource
 import com.iesam.huellaskotlintrainning.data.remote.CatApiRemoteDataSource
 import com.iesam.huellaskotlintrainning.domain.Cat
@@ -54,20 +55,19 @@ class CatDataRepository(
         }
         val resultRemote = apiSource.getCatsWithError()
 
-       resultRemote.mapLeft {
-            return Either.Right(localSource.findAll())
-
+      /* resultRemote.mapLeft {
+            return localSource.findAll().right()
         }
-        return resultRemote
 
+        return resultRemote*/
 
-        /*return if (resultRemote.isLeft()){
+        return if (resultRemote.isLeft()){
             Either.Right(localSource.findAll())
 
 
         }else{
             Either.Right(localSource.findAll())
-        }*/
+        }
 
 
     }
